@@ -43,8 +43,8 @@ stages:
   displayName: 'Deploy the container'
   dependsOn: Build
   jobs:
-  - job: 'Deploy'
-    displayName: 'Deploy job'
+  - deployment: Deploy
+    displayName: Deploy
     pool:
       vmImage: 'ubuntu-18.04'
       environment: 'spike.default'
@@ -54,8 +54,8 @@ stages:
       runOnce:
         deploy:
           steps:
-            - download: current
-              artifact: manifests
+          - download: current
+            artifact: manifests
     steps:
     - task: AzureWebAppContainer@1
       inputs:
